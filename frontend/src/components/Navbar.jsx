@@ -56,7 +56,7 @@ const Navbar = () => {
     const logoutHandler = async (e) => {
 
         try {
-            const res = await axios.get(`https://mern-blog-ha28.onrender.com/api/v1/user/logout`, { withCredentials: true });
+            const res = await axios.get(`https://codemasti-xrmd.onrender.com/api/v1/user/logout`, { withCredentials: true });
             if (res.data.success) {
                 navigate("/")
                 dispatch(setUser(null))
@@ -88,7 +88,7 @@ const Navbar = () => {
                     <Link to={'/'}>
                         <div className='flex gap-2 items-center'>
                             <img src={Logo} alt="" className='w-7 h-7 md:w-10 md:h-10 dark:invert' />
-                            <h1 className='font-bold text-3xl md:text-4xl'>Logo</h1>
+                            <h1 className='font-bold text-3xl md:text-4xl'>CodeMasti</h1>
                         </div>
                     </Link>
                     <div className='relative hidden md:block'>
