@@ -22,6 +22,8 @@ export const createComment = async (req, res) => {
       select: 'firstName lastName photoUrl'
     })
 
+
+
     blog.comments.push(comment._id);
     await blog.save()
     return res.status(201).json({
@@ -107,6 +109,7 @@ export const editComment = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Comment is not edited", error: error.message })
+
   }
 }
 
@@ -185,4 +188,3 @@ export const getAllCommentsOnMyBlogs = async (req, res) => {
   }
 };
 
-  

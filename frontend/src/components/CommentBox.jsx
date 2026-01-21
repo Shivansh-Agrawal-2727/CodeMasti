@@ -53,11 +53,12 @@ const CommentBox = ({ selectedBlog }) => {
     useEffect(() => {
         const getAllCommentsOfBlog = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/api/v1/comment/${selectedBlog._id}/comment/all`)
+                const res = await axios.get(`https://mern-blog-ha28.onrender.com/api/v1/comment/${selectedBlog._id}/comment/all`)
                 const data = res.data.comments
                 dispatch(setComment(data))
             } catch (error) {
                 console.log(error);
+
             }
         }
         getAllCommentsOfBlog()
@@ -65,7 +66,7 @@ const CommentBox = ({ selectedBlog }) => {
 
     const commentHandler = async () => {
         try {
-            const res = await axios.post(`http://localhost:8000/api/v1/comment/${selectedBlog._id}/create`, { content }, {
+            const res = await axios.post(`https://mern-blog-ha28.onrender.com/api/v1/comment/${selectedBlog._id}/create`, { content }, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -98,7 +99,7 @@ const CommentBox = ({ selectedBlog }) => {
 
     const deleteComment = async (commentId) => {
         try {
-            const res = await axios.delete(`http://localhost:8000/api/v1/comment/${commentId}/delete`, {
+            const res = await axios.delete(`https://mern-blog-ha28.onrender.com/api/v1/comment/${commentId}/delete`, {
                 withCredentials: true
             })
             if (res.data.success) {
@@ -118,7 +119,7 @@ const CommentBox = ({ selectedBlog }) => {
     const editCommentHandler = async (commentId) => {
         try {
             const res = await axios.put(
-                `http://localhost:8000/api/v1/comment/${commentId}/edit`,
+                `https://mern-blog-ha28.onrender.com/api/v1/comment/${commentId}/edit`,
                 { content: editedContent },
                 {
                     withCredentials: true,
@@ -143,30 +144,30 @@ const CommentBox = ({ selectedBlog }) => {
         }
     };
 
-    const likeCommentHandler = async (commentId) => {
-        try {
-            const res = await axios.get(
-                `http://localhost:8000/api/v1/comment/${commentId}/like`,
-                {
-                    withCredentials: true,
-                }
-            );
+     const likeCommentHandler = async (commentId) => {
+         try {
+             const res = await axios.get(
+                 `https://mern-blog-ha28.onrender.com/api/v1/comment/${commentId}/like`,
+                 {
+                     withCredentials: true,
+                 }
+             );
 
-            if (res.data.success) {
-                const updatedComment = res.data.updatedComment;
+             if (res.data.success) {
+                 const updatedComment = res.data.updatedComment;
 
-                const updatedCommentList = comment.map(item =>
-                    item._id === commentId ? updatedComment : item
-                );
+                 const updatedCommentList = comment.map(item =>
+                     item._id === commentId ? updatedComment : item
+                 );
 
-                dispatch(setComment(updatedCommentList));
-                toast.success(res.data.message)
-            }
-        } catch (error) {
-            console.error("Error liking comment", error);
-            toast.error("Something went wrong");
-        }
-    };
+                 dispatch(setComment(updatedCommentList));
+                 toast.success(res.data.message)
+             }
+         } catch (error) {
+             console.error("Error liking comment", error);
+             toast.error("Something went wrong");
+         }
+     };
 
 
     return (

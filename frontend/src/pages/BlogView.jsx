@@ -36,7 +36,7 @@ const BlogView = () => {
     const likeOrDislikeHandler = async () => {
         try {
             const action = liked ? 'dislike' : 'like';
-            const res = await axios.get(`http://localhost:8000/api/v1/blog/${selectedBlog?._id}/${action}`, { withCredentials: true })
+            const res = await axios.get(`https://mern-blog-ha28.onrender.com/api/v1/blog/${selectedBlog?._id}/${action}`, { withCredentials: true })
             if (res.data.success) {
                 const updatedLikes = liked ? blogLike - 1 : blogLike + 1;
                 setBlogLike(updatedLikes);
@@ -76,27 +76,27 @@ const BlogView = () => {
     // };
     const handleShare = (blogId) => {
         const blogUrl = `${window.location.origin}/blogs/${blogId}`;
-
+      
         if (navigator.share) {
-            navigator
-                .share({
-                    title: 'Check out this blog!',
-                    text: 'Read this amazing blog post.',
-                    url: blogUrl,
-                })
-                .then(() => console.log('Shared successfully'))
-                .catch((err) => console.error('Error sharing:', err));
+          navigator
+            .share({
+              title: 'Check out this blog!',
+              text: 'Read this amazing blog post.',
+              url: blogUrl,
+            })
+            .then(() => console.log('Shared successfully'))
+            .catch((err) => console.error('Error sharing:', err));
         } else {
-            // fallback: copy to clipboard
-            navigator.clipboard.writeText(blogUrl).then(() => {
-                toast.success('Blog link copied to clipboard!');
-            });
+          // fallback: copy to clipboard
+          navigator.clipboard.writeText(blogUrl).then(() => {
+            toast.success('Blog link copied to clipboard!');
+          });
         }
-    };
+      };
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+      useEffect(()=>{
+        window.scrollTo(0,0)
+      },[])
     return (
         <div className='pt-14'>
             <div className='max-w-6xl mx-auto p-10'>
@@ -178,7 +178,7 @@ const BlogView = () => {
                             <Button variant="ghost" size="sm">
                                 <Bookmark className="h-4 w-4" />
                             </Button>
-                            <Button onClick={() => handleShare(selectedBlog._id)} variant="ghost" size="sm">
+                            <Button onClick={()=>handleShare(selectedBlog._id)} variant="ghost" size="sm">
                                 <Share2 className="h-4 w-4" />
                             </Button>
                         </div>
@@ -212,4 +212,3 @@ const BlogView = () => {
 }
 
 export default BlogView
-                            

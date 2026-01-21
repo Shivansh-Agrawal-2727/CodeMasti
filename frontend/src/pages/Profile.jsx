@@ -69,7 +69,7 @@ const Profile = () => {
 
         try {
             setLoading(true)
-            const res = await axios.put(`http://localhost:8000/api/v1/user/profile/update`, formData, {
+            const res = await axios.put(`https://mern-blog-ha28.onrender.com/api/v1/user/profile/update`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },
@@ -231,6 +231,7 @@ const Profile = () => {
                                         loading ? <Button ><Loader2 className='mr-2 w-4 h-4 animate-spin' /> Please wait</Button> : <Button
                                             onClick={submitHandler} >Save Changes</Button>
                                     }
+
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>

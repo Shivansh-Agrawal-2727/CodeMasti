@@ -7,7 +7,7 @@ import cloudinary from "../utils/cloudinary.js";
 
 export const register = async (req, res) => {
     try {
-        const { firstName, lastName, email,  password } = req.body
+        const { firstName, lastName, email,  password } = req.body;
         if (!firstName || !lastName || !email ||  !password) {
             return res.status(400).json({
                 success: false,
@@ -93,7 +93,7 @@ export const login = async(req, res) => {
         }
         
         const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY, { expiresIn: '1d' })
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: "strict" }).json({
+        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: "strict" }).json({
             success:true,
             message:`Welcome back ${user.firstName}`,
             user
@@ -110,7 +110,7 @@ export const login = async(req, res) => {
 
 export const logout = async (_, res) => {
     try {
-        return res.status(200).cookie("token", "", { maxAge: 0, httpOnly: true, sameSite: "strict"}).json({
+        return res.status(200).cookie("token", "", { maxAge: 0 }).json({
             message: "Logged out successfully.",
             success: true
         })
